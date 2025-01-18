@@ -2,9 +2,12 @@ import { chromium } from 'playwright';
 
 const run = async () => {
   const browser = await chromium.launch();
-  const page = await browser.newPage();
+  const context = await browser.newContext({
+    locale: 'ja-JP',
+  });
+  const page = await context.newPage();
 
-  await page.goto('https://playwright.dev/docs/intro');
+  await page.goto('https://takeout.google.com');
 
   await page.screenshot({ path: 'screenshots/screenshot.png' });
 
