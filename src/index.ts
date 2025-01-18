@@ -12,6 +12,8 @@ const run = async () => {
   const email: string = process.env.GOOGLE_EMAIL || '';
   await page.fill('input[type="email"]', email);
 
+  await page.click('text=次へ');
+
   await page.screenshot({ path: 'screenshots/screenshot.png' });
 
   await browser.close();
