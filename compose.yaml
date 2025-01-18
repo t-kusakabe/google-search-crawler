@@ -12,5 +12,6 @@ services:
     environment:
       STAGE: "development"
       GOOGLE_EMAIL: ""
+      GOOGLE_PASSWORD: ""
     tty: true
     stdin_open: true
