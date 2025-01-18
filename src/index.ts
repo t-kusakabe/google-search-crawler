@@ -8,6 +8,9 @@ const run = async () => {
   const page = await context.newPage();
 
   await page.goto('https://takeout.google.com');
+  
+  const email: string = process.env.GOOGLE_EMAIL || '';
+  await page.fill('input[type="email"]', email);
 
   await page.screenshot({ path: 'screenshots/screenshot.png' });
 

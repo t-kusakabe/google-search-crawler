@@ -11,5 +11,6 @@ services:
         target: /google-search-crawler
     environment:
       STAGE: "development"
+      GOOGLE_EMAIL: ""
     tty: true
     stdin_open: true
