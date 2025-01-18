@@ -1,0 +1,15 @@
+services:
+  playwright:
+    build:
+      context: .
+      dockerfile: ./docker/playwright/Dockerfile
+    container_name: playwright
+    command: /bin/sh
+    volumes:
+      - type: bind
+        source: .
+        target: /google-search-crawler
+    environment:
+      STAGE: "development"
+    tty: true
+    stdin_open: true
