@@ -1,7 +1,7 @@
 import { chromium } from 'playwright';
 
 const run = async () => {
-  const browser = await chromium.launch();
+  const browser = await chromium.launch({ headless: true });
   const context = await browser.newContext({
     locale: 'ja-JP',
   });
