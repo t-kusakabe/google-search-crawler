@@ -1,4 +1,5 @@
 import { chromium } from 'playwright';
+import fs from 'fs';
 
 const run = async () => {
   const browser = await chromium.launch({ headless: true });
@@ -20,6 +21,9 @@ const run = async () => {
   await page.fill('input[type="password"]', password);
 
   await page.click('text=次へ');
+
+  const cookies = await context.cookies();
+  fs.writeFileSync('cookies.json', JSON.stringify(cookies));
 
   await page.screenshot({ path: 'screenshots/screenshot.png' });
 
