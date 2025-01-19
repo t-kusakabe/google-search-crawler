@@ -14,6 +14,11 @@ const run = async () => {
 
   await page.click('text=次へ');
 
+  const password = process.env.GOOGLE_PASSWORD || '';
+  await page.fill('input[type="password"]', password);
+
+  await page.click('text=次へ');
+
   await page.screenshot({ path: 'screenshots/screenshot.png' });
 
   await browser.close();
