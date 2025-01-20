@@ -13,14 +13,16 @@ const run = async () => {
   await page.goto('https://takeout.google.com');
 
   const email: string = process.env.GOOGLE_EMAIL || '';
-  await page.fill('input[type="email"]', email);
+  await page.type('input[type="email"]', email, { delay: 100 });
 
   await page.click('text=次へ');
 
   const password = process.env.GOOGLE_PASSWORD || '';
-  await page.fill('input[type="password"]', password);
+  await page.type('input[name="Passwd"]', password, { delay: 100 });
 
   await page.click('text=次へ');
+
+  await new Promise((resolve) => setTimeout(resolve, 5000));
 
   const cookies = await context.cookies();
   fs.writeFileSync('cookies.json', JSON.stringify(cookies));
