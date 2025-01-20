@@ -13,13 +13,13 @@ const run = async () => {
   await page.goto('https://takeout.google.com');
 
   const email: string = process.env.GOOGLE_EMAIL || '';
-  await page.type('input[type="email"]', email, { delay: 100 });
-
+  const emailInput = page.locator('input[type="email"]');
+  await emailInput.pressSequentially(email, { delay: 100 });
   await page.click('text=次へ');
 
   const password = process.env.GOOGLE_PASSWORD || '';
-  await page.type('input[name="Passwd"]', password, { delay: 100 });
-
+  const passwordInput = page.locator('input[name="Passwd"]');
+  await passwordInput.pressSequentially(password, { delay: 100 });
   await page.click('text=次へ');
 
   await new Promise((resolve) => setTimeout(resolve, 5000));
