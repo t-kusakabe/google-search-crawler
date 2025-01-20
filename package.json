@@ -4,7 +4,8 @@
   "description": "特定のGoogleアカウントを使って、パーソナライズされた検索結果を取得するためのサンプルコード。",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts",
+    "login": "ts-node src/login/index.ts",
+    "search": "ts-node src/search/index.ts",
     "build": "tsc",
     "check": "biome check --write ./src"
   },
