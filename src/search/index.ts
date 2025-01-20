@@ -14,6 +14,11 @@ const run = async () => {
 
   const page = await context.newPage();
   await page.goto('https://www.google.com');
+
+  const searchInput = page.locator('textarea[title="検索"]');
+  await searchInput.pressSequentially('Playwright', { delay: 100 });
+
+  await page.keyboard.press('Enter');
 };
 
 run().catch((error) => {
