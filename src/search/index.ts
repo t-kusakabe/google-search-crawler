@@ -1,5 +1,6 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
+import csv from 'csv-parser';
 
 const run = async () => {
   const browser = await chromium.launch({ headless: false });
@@ -15,10 +16,22 @@ const run = async () => {
   const page = await context.newPage();
   await page.goto('https://www.google.com');
 
+  const keywords = await readCsv();
+
   const searchInput = page.locator('textarea[title="検索"]');
-  await searchInput.pressSequentially('Playwright', { delay: 100 });
+  await searchInput.pressSequentially(keywords[0]['keyword'], { delay: 100 });
 
   await page.keyboard.press('Enter');
+};
+
+const readCsv = async (): Promise<Record<string, string>[]> => {
+  return new Promise((resolve) => {
+    const keywords: Record<string, string>[] = [];
+    fs.createReadStream('./keywords.csv')
+      .pipe(csv())
+      .on('data', (data) => keywords.push(data))
+      .on('end', () => resolve(keywords));
+  });
 };
 
 run().catch((error) => {
