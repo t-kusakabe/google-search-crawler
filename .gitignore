@@ -13,6 +13,7 @@ dist-ssr
 *.local
 screenshots/*
 !screenshots/.gitkeep
+cookies.json
 
 # Editor directories and files
 .vscode/*
