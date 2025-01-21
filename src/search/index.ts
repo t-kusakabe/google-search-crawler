@@ -14,14 +14,28 @@ const run = async () => {
   await context.addCookies(cookies);
 
   const page = await context.newPage();
-  await page.goto('https://www.google.com');
 
   const keywords = await readCsv();
 
-  const searchInput = page.locator('textarea[title="検索"]');
-  await searchInput.pressSequentially(keywords[0]['keyword'], { delay: 100 });
+  for (const keyword of keywords) {
+    console.log(keyword['keyword']);
 
-  await page.keyboard.press('Enter');
+    await page.goto('https://www.google.com');
+
+    await page.locator('textarea[title="検索"]').waitFor()
+    const searchInput = page.locator('textarea[title="検索"]');
+    await searchInput.pressSequentially(keyword['keyword'], { delay: 100 + Math.random() * 300 });
+
+    await page.keyboard.press('Enter');
+
+    await page.locator('#rcnt').waitFor();
+
+    const sponsors = page.locator('.uEierd');
+    await page.waitForTimeout(2000 + Math.random() * 2000);
+
+    const cnt = await sponsors.count()
+    console.log(cnt);
+  }
 };
 
 const readCsv = async (): Promise<Record<string, string>[]> => {
