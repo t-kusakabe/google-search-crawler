@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+data/*
+!data/.gitkeep
 screenshots/*
 !screenshots/.gitkeep
 cookies.json
