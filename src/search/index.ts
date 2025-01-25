@@ -10,7 +10,7 @@ const run = async () => {
     locale: 'ja-JP',
   });
 
-  const cookies = JSON.parse(fs.readFileSync('cookies.json', 'utf-8'));
+  const cookies = JSON.parse(fs.readFileSync('./data/cookies.json', 'utf-8'));
   await context.addCookies(cookies);
 
   const page = await context.newPage();

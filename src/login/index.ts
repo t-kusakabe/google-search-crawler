@@ -28,7 +28,7 @@ const run = async () => {
   await new Promise((resolve) => setTimeout(resolve, 5000));
 
   const cookies = await context.cookies();
-  fs.writeFileSync('cookies.json', JSON.stringify(cookies));
+  fs.writeFileSync('./data/cookies.json', JSON.stringify(cookies));
 
   await page.screenshot({ path: 'screenshots/screenshot.png' });
 
