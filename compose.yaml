@@ -13,5 +13,6 @@ services:
       STAGE: "development"
       GOOGLE_EMAIL: ""
       GOOGLE_PASSWORD: ""
+      USER_AGENT: ""
     tty: true
     stdin_open: true
