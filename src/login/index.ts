@@ -8,6 +8,7 @@ const run = async () => {
     viewport: { width: 1280, height: 720 },
     locale: 'ja-JP',
   });
+  context.setDefaultTimeout(0);
   const page = await context.newPage();
 
   await page.goto('https://takeout.google.com');
