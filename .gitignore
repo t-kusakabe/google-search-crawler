@@ -15,7 +15,6 @@ data/*
 !data/.gitkeep
 screenshots/*
 !screenshots/.gitkeep
-cookies.json
 
 # Editor directories and files
 .vscode/*
