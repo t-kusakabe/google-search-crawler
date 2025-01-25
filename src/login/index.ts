@@ -15,12 +15,14 @@ const run = async () => {
 
   const email: string = process.env.GOOGLE_EMAIL || '';
   const emailInput = page.locator('input[type="email"]');
-  await emailInput.pressSequentially(email, { delay: 100 });
+  await page.waitForTimeout(1000);
+  await emailInput.pressSequentially(email, { delay: 100 + Math.random() * 300 });
   await page.click('text=次へ');
 
   const password = process.env.GOOGLE_PASSWORD || '';
   const passwordInput = page.locator('input[name="Passwd"]');
-  await passwordInput.pressSequentially(password, { delay: 100 });
+  await page.waitForTimeout(1000);
+  await passwordInput.pressSequentially(password, { delay: 100 + Math.random() * 300 });
   await page.click('text=次へ');
 
   await new Promise((resolve) => setTimeout(resolve, 5000));
