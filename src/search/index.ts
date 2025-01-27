@@ -28,13 +28,30 @@ const run = async () => {
 
     await page.keyboard.press('Enter');
 
-    await page.locator('#rcnt').waitFor();
+    await page.locator('#rcnt').waitFor({ timeout: 100000 });
+
+    await page.evaluate(() => {
+      return Object.fromEntries(
+        Array.from({ length: localStorage.length })
+          .map((_, index) => {
+            const key: string = localStorage.key(index) as string;
+            return [key, localStorage.getItem(key)];
+          })
+      );
+    });
 
     const sponsors = page.locator('.uEierd');
-    await page.waitForTimeout(2000 + Math.random() * 2000);
+    await page.waitForTimeout(2000);
 
-    const cnt = await sponsors.count()
-    console.log(cnt);
+    if (await sponsors.count() === 0) {
+      console.log('No sponsors');
+      continue;
+    }
+
+    const test = await sponsors.locator('div div div span').nth(0).innerText();
+    console.log(test);
+
+    await page.waitForTimeout(2000 + Math.random() * 3000);
   }
 };
 
