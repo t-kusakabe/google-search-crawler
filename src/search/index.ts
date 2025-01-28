@@ -40,21 +40,29 @@ const run = async () => {
       );
     });
 
-    const sponsors = page.locator('.uEierd');
-    await page.waitForTimeout(2000);
+    const sponsors = await page.locator('.uEierd > div > div > div').elementHandles();
+    await page.waitForTimeout(3000);
 
-    if (await sponsors.count() === 0) {
+    if (sponsors.length === 0) {
       console.log('No sponsors');
       continue;
     }
+    console.log(sponsors.length);
 
-    const links = sponsors.locator('div >  div > div');
+    for (const sponsor of sponsors) {
+      const title = await sponsor.$('div > a > div > span > span > span > div > span');
+      if (title) {
+        const str = await title.innerText();
+        console.log(`title: ${str}`);
+      }
 
-    Array.from({ length: await links.count() })
-      .map(async (_, index) => {
-        const href = await links.nth(index).locator('div > a').getAttribute('href');
-        console.log(href);
-      });
+      const anchor = await sponsor.$('div > a')
+      if (anchor) {
+        const href = await anchor.getAttribute('href');
+        console.log(`link: ${href}`);
+      }
+
+    }
 
     await page.waitForTimeout(10000 + Math.random() * 3000);
   }
