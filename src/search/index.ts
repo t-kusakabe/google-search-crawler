@@ -48,10 +48,15 @@ const run = async () => {
       continue;
     }
 
-    const test = await sponsors.locator('div div div span').nth(0).innerText();
-    console.log(test);
+    const links = sponsors.locator('div >  div > div');
 
-    await page.waitForTimeout(2000 + Math.random() * 3000);
+    Array.from({ length: await links.count() })
+      .map(async (_, index) => {
+        const href = await links.nth(index).locator('div > a').getAttribute('href');
+        console.log(href);
+      });
+
+    await page.waitForTimeout(10000 + Math.random() * 3000);
   }
 };
 
